@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="UTF-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><!-- Title: add your Portfolio websites's title here --><!-- Add some coding keywords below, Ex: (javascript, yourusername, etc) --><meta name="keywords" content="Dark Devil, Taha, skill" /><!-- Improve your SEO by adding a small descrption of you --><meta name="description" content="Dark Devil | Developer" /><!-- Add a your png Logo to the assets folder and change the href attr accordingly  --><!-- Add your primary-theme color for the value of content --><meta name="theme-color" content="#36d1dc" /><!-- Open Graph / Facebook --><meta property="og:type" content="website" /><!-- Fill content with the URL of this portfolio you'll host --><meta property="og:url" content="https://darkdevil.is-a.dev/" /><!-- Fill content with the title of your portfolio(Recommended to use what you put in <title> tag) --><meta property="og:title" content="Dark Devil | Developer" /><!-- Give a short description that'll show up when you/someone shares your portfolio on different platform --><meta property="og:description" content="Dark Devil is a developer :D" /><!-- Add a thumbnail image in assets folder and fill the content attr with URL to that thumbnail so that a thumbnail image of your portfolio is shown while shared on other platform --><!-- Twitter --><meta property="twitter:card" content="summary_large_image" /><!-- Again fill content attr with the URL of this portfolio you'll host --><meta property="twitter:url" content="https://darkdevil.is-a.dev" /><!-- Recommended to use the same text used within <title> element --><meta property="twitter:title" content="Dark Devil | Developer" /><!-- short description that shows up while your portfolio is shared --><meta property="twitter:description" content="Dark Devil is a developer :D"/><!-- Fill content with the URL to the thumbnail image that you'll put in the assets folder --><!-- <metaproperty="twitter:image"content=""/> --><!-- link tags --><link rel="stylesheet" href="./css/main.css" /><link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/><script src="./javascript/scrollreveal.min.js"></script><script defertype="text/javascript"src="./javascript/scrollveal.js"></script><script src="https://kit.fontawesome.com/e2a7339b4d.js" crossorigin="anonymous"></script><!-- Remove Google Analytics once you have your portfolio website set-up --><!-- Global site tag (gtag.js) - Google Analytics --><script asyncsrc="https://www.googletagmanager.com/gtag/js?id=UA-122228201-4"></script><script>window.dataLayer = window.dataLayer || [];function gtag() {dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "UA-122228201-4");</script><!-- End of Google Analytics -->
+    <link rel="stylesheet" href="style.css">
+    <title>The A Story Books</title>
+    <link rel="icon" type="image/png" href="./assets/profile.png" />
+    </head>
+    <body>
+        <div id="hero">
+            <section class="container">
+              
+              <h1 class="hero-title">
+                <img src="assets/A.png"> Welcome to: <span class="text-color-main name">The A Story Books</span>
+              </h1>
+              <h2>The A Story Books writes the stories which you have not imagined!</h2>
+              <h2>Reading is <em>COOOOL!!!</em></h2>
+              <p>.</p>
+              <p>.</p>
+              <p>.</p>
+              <p class="hero-cta">
+                <a class="cta-btn cta-btn--hero" href="#about">Let's go!</a>
+              </p>
+            </section>
+          </div>
+          <section id="about">
+            <div class="container">
+              <h2 class="section-title">About US</h2>
+              <div class="row about-wrapper">
+                <div class="about-wrapper__image">
+                  <img
+                    class="img-fluid"
+                    src="./assets/profile.png"
+                    alt="Profile Image"
+                  />
+                </div>
+                <div class="about-wrapper__info">
+                  <h3><u>Since:</u> 2020</h3>
+                  <h3><u>Gmail:</u> imakbss@gmail.com</h3>
+                  <h3><u>Made in:</u> Pakistan</h3>
+                  <h3><u>Get in touch with us:</u> <a href="index3.html">Click here</a></h3>
+                  <h3>This is our sample ad:</h3>
+                  <p> <video id="video"controls>
+                    <source src="videos/The A Story Books Ad.mp4" type="video/mp4">
+                  </video></p>
+                  <h4><a href="#header">Scroll down.</a></h4>
+                </div>
+              </div>
+            </div>
+          </section>
+          <div id="Like"><h1>The A Story Books | Likes:</h1>
+            <h4>We'll apriciate if you gave us a like! Our goal is to reach atleast 100 likes. Your like will be uploaded soon.</h4>
+          <h4>Just click the button and enter your email/gmail address in the box, which will appear at top after clicking. You can't like twice.</h4>
+          <button id="lb"><h5><span id="lc"></span> Likes</h5></button>
+                    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+                   <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-firestore.js"></script>
+                    <script>
+                   const firebaseConfig = {
+                   apiKey: "AIzaSyAtNUqB6LOViVhz9cNHIxhgjG3KnBdubww",
+                   authDomain: "a-storybooks.firebaseapp.com",
+                   databaseURL: "https://a-storybooks-default-rtdb.firebaseio.com",
+                   projectId: "a-storybooks",
+                   storageBucket: "a-storybooks.appspot.com",
+                   messagingSenderId: "339573630648",
+                   appId: "1:339573630648:web:6c306d1ceb3d00a13e364d",
+                   measurementId: "G-WZHWJTKC6X"
+                   };
+                   firebase.initializeApp(firebaseConfig);
+                   const db = firebase.firestore();
+                   const lc = document.getElementById('lc');
+                   db.collection('likes').doc('count').get().then(doc => {
+                   if (doc && doc.exists) {
+                   const count = doc.data().count;
+                   lc.textContent = count;
+                   } else {
+                   lc.textContent = '0';
+                   }
+                   });
+                   const lb = document.getElementById('lb');
+                   lb.addEventListener('click', () => {
+                   if (localStorage.getItem('liked')) {
+                   return alert("You cannot Like twice");
+                   }
+                   const email = window.prompt('Enter your email address');
+                   let count;
+                   if (isValidEmail(email)) {        db.collection('likes').doc(email).get().then(doc => {
+                   if (doc && doc.exists) {
+                   window.alert('This email address has already been used');
+                   } else {
+                   db.collection('likes').doc('count').get().then(doc => {
+                   if (doc && doc.exists) {
+                   count = doc.data().count;
+                   } else {
+                   count = 0;
+                   }
+                   const newCount = count + 1;
+                    db.collection('likes').doc(email).set({
+                   count: newCount
+                   }).then(() => {
+                    db.collection('likes').doc('count').set({
+                   count: newCount
+                   });
+                   lc.innerText = newCount;
+                   alert("Thanks");
+                   localStorage.setItem("liked", true);
+                   });
+                   });
+                   }
+                   });
+                   } else {
+                   window.alert('Invalid email address');
+                   }
+                   });
+                   function isValidEmail(email) {
+                   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                   return emailRegex.test(email);
+                   }
+                   </script>
+                   <!--Button-end-->
+                  </div>
+          <div id="header">
+            <h1><u>All Stories: (New Stories will be Uploaded Later)</u></h1>
+            <p><a href="https://www.docdroid.net/uO109ax/1-a-day-in-cave-docx"><img src="Book covers/1.png"></a>
+            <a href="https://www.docdroid.net/VgpOOWY/2-a-new-hero-docx"><img src="Book covers/2.png"></a>
+            <a href="https://www.docdroid.net/tueymKC/3-the-jungle-bros-docx"><img src="Book covers/3.png"></a>
+            <a href="https://www.docdroid.net/nEmuZak/4-a-rich-person-docx"><img src="Book covers/4.png"></a>
+          </p>
+          <p>
+            <a href="https://www.docdroid.net/PLTgAqr/5-the-big-heist-docx"><img src="Book covers/5.png"></a>
+            <a href="https://www.docdroid.net/M5Ksep4/6-i-love-pakistan-docx"><img src="Book covers/6.png"></a>
+            <a href="https://www.docdroid.net/eZHUksM/7-football-is-not-allowed-docx"><img src="Book covers/7.png"></a>
+            <a href="https://www.docdroid.net/7cfYU9C/8-the-plants-king-docx"><img src="Book covers/8.png"></a>
+            </p>
+            <p>
+            <a href="https://www.docdroid.net/gGsR3ZY/9-the-wild-tiger-docx"><img src="Book covers/9.png"></a>
+            <a href="https://www.docdroid.net/1fLBiHI/10-that-black-cat-docx"><img src="Book covers/10.png"></a>
+            <a href="https://www.docdroid.net/lHi6blR/11-pdf"><img src="Book covers/11.png"></a>
+          </p>
+          </div>
+      
+          <script>
+            document.getElementById("year").textContent = new Date().getFullYear();
+          </script>
+          <script src="./javascript/vanilla-tilt.min.js"></script>
+          <script type="text/javascript" src="./javascript/valtilt.js"></script>
+    </body>
+</html>
